@@ -1,0 +1,162 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>ZeroBounce</title>
+    <base href="/members/"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Sign in to your ZeroBounce account to access exclusive features and services. Securely sign in to manage your account and take advantage of our platform."/>
+    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+    <meta name="color-scheme" content="light only"/>
+    <script type="text/javascript">
+      window.addEventListener('error', e => {
+        console.error(e.message, e.filename, e.lineno, e.colno, e.error);
+      });
+    </script>
+    <!-- <script async type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+    <script async type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script> -->
+    <!-- Start of zerobounce Zendesk Widget script -->
+    <!-- <script async id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=33291a34-2b07-4b2d-b445-d061c553d19e"></script> -->
+    <!-- End of zerobounce Zendesk Widget script -->
+
+    <style>
+      .UnsupportedBrowserContainer {
+        display: table;
+        height: 100%;
+        width: 100%;
+      }
+
+      #UnsupportedBrowserPage-login {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .UnsupportedBrowserPanel {
+        height: 100px;
+        text-align: center;
+        color: #e65849;
+      }
+
+      .loaderIE {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        visibility: hidden;
+        background-color: var(--backgroundColor);
+      }
+
+      .loaderIE.loading-currently {
+        visibility: visible;
+        z-index: 1000;
+      }
+
+      .loadingFullScreen {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #3498db;
+        width: 120px;
+        height: 120px;
+        -webkit-animation: spin 2s linear infinite;
+        /* Safari */
+        animation: spin 2s linear infinite;
+        margin: 20px auto;
+      }
+
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  <link rel="stylesheet" href="styles.215e4badb53b9575.css"></head>
+
+  <body>
+    <!--[if lt IE 11]> Place Content here for Users of Internet Explorer 9 or lower. <![endif]-->
+    <div id="loaderIE" class="loaderIE">
+      <div class="loadingFullScreen">
+        <div class="loader"></div>
+        <p>ZeroBounce Members is loading!<p>
+      </div>
+    </div>
+    <app-root></app-root>
+    <script>
+      const isOldSafari = () => {
+        //ignore older safari 
+        const userAgent = navigator.userAgent.toLowerCase();
+        if(userAgent.indexOf('safari') > -1 && userAgent.indexOf('chrome') === -1) {
+          const arrUserAgent = userAgent.split(" ");
+          const strVersionPart = arrUserAgent[arrUserAgent.length - 2];
+          const strVersion = strVersionPart.split("/")[1];
+          const versionNr = Number(strVersion);
+          if(versionNr < 15) {
+            return true;
+          }
+        }
+        return false;
+      }
+      const isIE = () => {
+        var userAgent = navigator.userAgent;
+        return (userAgent.indexOf("MSIE") > -1 || userAgent.indexOf("Trident") > -1);
+      }
+      let added = false;
+      const clearLoading = () => {
+        let loaderElement = document.getElementById('loaderIE');
+        if (loaderElement) {
+          loaderElement.classList.remove('loading-currently');
+        }
+      };
+
+      const testing = setInterval(() => {
+        if (document.getElementsByTagName('app-root')[0].attributes['ng-version'] === undefined) {
+          if (!added) {
+            const loaderElement = document.getElementById('loaderIE');
+            loaderElement.classList.add('loading-currently');
+            added = true;
+          }
+        } else {
+          clearLoading();
+          clearInterval(testing);
+        }
+      }, 100);
+      setTimeout(() => {
+        clearInterval(testing);
+        clearLoading();
+        if (document.getElementsByTagName('app-root')[0].attributes['ng-version'] === undefined) {
+          if(isOldSafari() || isIE()) {
+            document.body.innerHTML += " <div class='UnsupportedBrowserContainer'><div id='UnsupportedBrowserPage-login'><div class='UnsupportedBrowserPanel'>ZeroBounce Members is not supported in this browser.<hr/> Please use other browsers!</div></div></div>";
+          } else {
+            window.location.reload();
+          }
+        }
+      }, 30000);
+      window.zESettings = {
+        webWidget: {
+          zIndex: 3,
+        },
+      };
+    </script>
+  <script src="runtime.b9234ad0f7ccd51e.js" type="module"></script><script src="polyfills.391071db6da821d8.js" type="module"></script><script src="main.78b9731c9807b8dc.js" type="module"></script></body>
+</html>
